@@ -1,0 +1,23 @@
+!!! 
+%html 
+%head 
+  %title CragList 
+
+  = csrf_meta_tags 
+  = csp_meta_tag 
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' 
+  = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' 
+
+%body
+  %nav.navbar.navbar-default 
+    .container 
+      .navbar-brand CragList 
+      %ul.nav.navbar-nav 
+        %li= link_to "All Tasks", root_path
+        - Category.all.each do |c|
+          %li= link_to c.name, tasks_path(category: c.name)
+      = link_to "New Task", new_task_path, class:"navbar-text navbar-right navbar-link"
+  .container 
+    .col-md-8.col-md-offset-2
+      =yield 
+  
